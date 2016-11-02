@@ -14,6 +14,8 @@
 		E53A50471DC76FED0007B073 /* xcity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E53A50451DC76FED0007B073 /* xcity.xcdatamodeld */; };
 		E53A50491DC76FED0007B073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E53A50481DC76FED0007B073 /* Assets.xcassets */; };
 		E53A504C1DC76FED0007B073 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E53A504A1DC76FED0007B073 /* LaunchScreen.storyboard */; };
+		E5609CB31DC884AB00B33375 /* CHDXCityCoreService.m in Sources */ = {isa = PBXBuildFile; fileRef = E5609CB21DC884AB00B33375 /* CHDXCityCoreService.m */; };
+		E5609CB81DC888B500B33375 /* CHDXCityHKService.m in Sources */ = {isa = PBXBuildFile; fileRef = E5609CB71DC888B500B33375 /* CHDXCityHKService.m */; };
 		E5FB6B1A1DC775B600B9ECE7 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FB6B191DC775B600B9ECE7 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,14 +24,20 @@
 		E53A503A1DC76FED0007B073 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E53A503C1DC76FED0007B073 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E53A503D1DC76FED0007B073 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E53A503F1DC76FED0007B073 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E53A50401DC76FED0007B073 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E53A503F1DC76FED0007B073 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../../../ViewController.h; sourceTree = "<group>"; };
+		E53A50401DC76FED0007B073 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../../../ViewController.m; sourceTree = "<group>"; };
 		E53A50431DC76FED0007B073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E53A50461DC76FED0007B073 /* xcity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = xcity.xcdatamodel; sourceTree = "<group>"; };
-		E53A50481DC76FED0007B073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E53A50481DC76FED0007B073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		E53A504B1DC76FED0007B073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E53A504D1DC76FED0007B073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E53A50551DC7733A0007B073 /* xcity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xcity.entitlements; sourceTree = "<group>"; };
+		E53A504D1DC76FED0007B073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		E53A50551DC7733A0007B073 /* xcity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = xcity.entitlements; path = ../xcity.entitlements; sourceTree = "<group>"; };
+		E5609CB11DC884AB00B33375 /* CHDXCityCoreService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDXCityCoreService.h; sourceTree = "<group>"; };
+		E5609CB21DC884AB00B33375 /* CHDXCityCoreService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDXCityCoreService.m; sourceTree = "<group>"; };
+		E5609CB41DC885AB00B33375 /* CHDXCityCoreServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDXCityCoreServiceProtocol.h; sourceTree = "<group>"; };
+		E5609CB51DC885E800B33375 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		E5609CB61DC888B500B33375 /* CHDXCityHKService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDXCityHKService.h; sourceTree = "<group>"; };
+		E5609CB71DC888B500B33375 /* CHDXCityHKService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDXCityHKService.m; sourceTree = "<group>"; };
 		E5FB6B191DC775B600B9ECE7 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -48,7 +56,6 @@
 		E53A502D1DC76FED0007B073 = {
 			isa = PBXGroup;
 			children = (
-				E5FB6B191DC775B600B9ECE7 /* HealthKit.framework */,
 				E53A50381DC76FED0007B073 /* xcity */,
 				E53A50371DC76FED0007B073 /* Products */,
 			);
@@ -65,16 +72,14 @@
 		E53A50381DC76FED0007B073 /* xcity */ = {
 			isa = PBXGroup;
 			children = (
-				E53A50551DC7733A0007B073 /* xcity.entitlements */,
+				E5609CAB1DC882A400B33375 /* asset */,
+				E5609CAA1DC8828C00B33375 /* dataModel */,
+				E5609CA91DC8826700B33375 /* config */,
+				E5609CA81DC8824600B33375 /* framework */,
+				E5609CA61DC8822F00B33375 /* module */,
+				E5609CA71DC8822F00B33375 /* service */,
 				E53A503C1DC76FED0007B073 /* AppDelegate.h */,
 				E53A503D1DC76FED0007B073 /* AppDelegate.m */,
-				E53A503F1DC76FED0007B073 /* ViewController.h */,
-				E53A50401DC76FED0007B073 /* ViewController.m */,
-				E53A50421DC76FED0007B073 /* Main.storyboard */,
-				E53A50481DC76FED0007B073 /* Assets.xcassets */,
-				E53A504A1DC76FED0007B073 /* LaunchScreen.storyboard */,
-				E53A504D1DC76FED0007B073 /* Info.plist */,
-				E53A50451DC76FED0007B073 /* xcity.xcdatamodeld */,
 				E53A50391DC76FED0007B073 /* Supporting Files */,
 			);
 			path = xcity;
@@ -86,6 +91,103 @@
 				E53A503A1DC76FED0007B073 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E5609CA61DC8822F00B33375 /* module */ = {
+			isa = PBXGroup;
+			children = (
+				E5609CAC1DC883A200B33375 /* commonModule */,
+			);
+			path = module;
+			sourceTree = "<group>";
+		};
+		E5609CA71DC8822F00B33375 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				E5609CB41DC885AB00B33375 /* CHDXCityCoreServiceProtocol.h */,
+				E5609CB11DC884AB00B33375 /* CHDXCityCoreService.h */,
+				E5609CB21DC884AB00B33375 /* CHDXCityCoreService.m */,
+				E5609CB61DC888B500B33375 /* CHDXCityHKService.h */,
+				E5609CB71DC888B500B33375 /* CHDXCityHKService.m */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
+		E5609CA81DC8824600B33375 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				E5FB6B191DC775B600B9ECE7 /* HealthKit.framework */,
+			);
+			name = framework;
+			sourceTree = "<group>";
+		};
+		E5609CA91DC8826700B33375 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				E53A504D1DC76FED0007B073 /* Info.plist */,
+				E53A50551DC7733A0007B073 /* xcity.entitlements */,
+				E5609CB51DC885E800B33375 /* PrefixHeader.pch */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		E5609CAA1DC8828C00B33375 /* dataModel */ = {
+			isa = PBXGroup;
+			children = (
+				E53A50451DC76FED0007B073 /* xcity.xcdatamodeld */,
+			);
+			path = dataModel;
+			sourceTree = "<group>";
+		};
+		E5609CAB1DC882A400B33375 /* asset */ = {
+			isa = PBXGroup;
+			children = (
+				E53A50421DC76FED0007B073 /* Main.storyboard */,
+				E53A50481DC76FED0007B073 /* Assets.xcassets */,
+				E53A504A1DC76FED0007B073 /* LaunchScreen.storyboard */,
+			);
+			path = asset;
+			sourceTree = "<group>";
+		};
+		E5609CAC1DC883A200B33375 /* commonModule */ = {
+			isa = PBXGroup;
+			children = (
+				E5609CAD1DC883A200B33375 /* controller */,
+				E5609CAE1DC883A200B33375 /* view */,
+				E5609CAF1DC883A200B33375 /* viewModel */,
+				E5609CB01DC883A200B33375 /* widget */,
+			);
+			path = commonModule;
+			sourceTree = "<group>";
+		};
+		E5609CAD1DC883A200B33375 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				E53A503F1DC76FED0007B073 /* ViewController.h */,
+				E53A50401DC76FED0007B073 /* ViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		E5609CAE1DC883A200B33375 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		E5609CAF1DC883A200B33375 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		E5609CB01DC883A200B33375 /* widget */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = widget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,6 +216,7 @@
 		E53A502E1DC76FED0007B073 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = CHDXCity;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Lampard Hong";
 				TargetAttributes = {
@@ -171,6 +274,8 @@
 				E53A503E1DC76FED0007B073 /* AppDelegate.m in Sources */,
 				E53A503B1DC76FED0007B073 /* main.m in Sources */,
 				E53A50471DC76FED0007B073 /* xcity.xcdatamodeld in Sources */,
+				E5609CB81DC888B500B33375 /* CHDXCityHKService.m in Sources */,
+				E5609CB31DC884AB00B33375 /* CHDXCityCoreService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +288,7 @@
 				E53A50431DC76FED0007B073 /* Base */,
 			);
 			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		E53A504A1DC76FED0007B073 /* LaunchScreen.storyboard */ = {
@@ -191,6 +297,7 @@
 				E53A504B1DC76FED0007B073 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -340,7 +447,8 @@
 				E53A50461DC76FED0007B073 /* xcity.xcdatamodel */,
 			);
 			currentVersion = E53A50461DC76FED0007B073 /* xcity.xcdatamodel */;
-			path = xcity.xcdatamodeld;
+			name = xcity.xcdatamodeld;
+			path = ../xcity.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

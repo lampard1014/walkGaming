@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <HealthKit/HealthKit.h>
+#import "CHDXCityHKService.h"
 
 @interface ViewController ()
 
@@ -21,12 +21,68 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self testIHealth];
+    [self testService];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)testService;
+{
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    
+    NSDateComponents *dateCom = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
+    
+    
+    
+    NSDate *startDate, *endDate;
+    
+    endDate = [calendar dateFromComponents:dateCom];
+    
+    
+    
+    [dateCom setHour:0];
+    
+    [dateCom setMinute:0];
+    
+    [dateCom setSecond:0];
+    
+    
+    
+    startDate = [calendar dateFromComponents:dateCom];
+
+    
+    CHDXCityHKService *hkService = [CHDXCityHKService shareInstanceWithConfig:nil]();
+    
+    [hkService fetchStatisticsDataWithShareTypes:nil
+                                       readTypes:[NSSet setWithObjects:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount], nil]
+                            statisticsSampleType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount]
+                                   withStartDate:startDate
+                                     withEndDate:endDate
+                           initialResultsHandler:^(HKStatisticsCollectionQuery * _Nonnull query, HKStatisticsCollection * _Nullable result) {
+                               
+                               NSLog(@"query %@ result %@",query,result);
+                               if (result.statistics) {
+                                   [result.statistics enumerateObjectsUsingBlock:^(HKStatistics * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                       NSLog(@"query %@ result %@",query,result);
+                                       
+                                       NSLog(@"obj %@ %f", obj, [obj sumQuantity]);
+                                   }];
+                               }
+                           }
+                         statisticsUpdateHandler:^(HKStatisticsCollectionQuery * _Nonnull query, HKStatistics * _Nullable statistics, HKStatisticsCollection * _Nullable collection) {
+                             NSLog(@"query %@ collection %@",query,collection);
+                             
+                         }
+                                     withFailure:^(HKStatisticsCollectionQuery * _Nonnull query, HKStatisticsCollection * _Nullable result, NSError * _Nullable error) {
+                                         NSLog(@"query %@ error %@",query,error);
+                                         
+                                     }];
+    
+    
 }
 
 - (void)testIHealth;
@@ -69,7 +125,7 @@
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     
-    NSDateComponents *dateCom = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:[NSDate date]];
+    NSDateComponents *dateCom = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
     
     
     
