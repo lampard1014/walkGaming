@@ -124,12 +124,12 @@ static CHDXCityHKService *shareInstance;
         
         NSDateComponents *hComponents = [calendar components:NSCalendarUnitHour fromDate:startDate];
         
-        [hComponents setHour:1];
+        [hComponents setHour:24];
         HKStatisticsCollectionQuery *query  =[[HKStatisticsCollectionQuery alloc] initWithQuantityType:sampleType quantitySamplePredicate:predicate options:op anchorDate:startDate intervalComponents:hComponents];
         
         
         HKStatisticsQuery *statisticsQuery = [[HKStatisticsQuery alloc]initWithQuantityType:sampleType quantitySamplePredicate:predicate options:op completionHandler:^(HKStatisticsQuery * _Nonnull query, HKStatistics * _Nullable result, NSError * _Nullable error) {
-            
+            NSLog(@"completed");
         }];
         
         query.initialResultsHandler = ^(HKStatisticsCollectionQuery *query, HKStatisticsCollection * __nullable result, NSError * __nullable error) {
