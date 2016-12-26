@@ -7,13 +7,15 @@
 //
 
 #import "CHDXCityMapSence.h"
-
+#import "CHDXCityMainSence.h"
 #import "CHDXCityHKService.h"
 
 @interface CHDXCityMapSence (){
     SKSpriteNode *iconNode;
     SKSpriteNode *backgroundNode;
     SKSpriteNode *goBtn;
+    SKLabelNode *labelStepCountNode;
+    SKShapeNode *node;
 }
 @property (nonatomic, assign)BOOL isCreated;
 
@@ -26,36 +28,51 @@
     if (!self.isCreated) {
         [self createContent];
         self.isCreated = YES;
-
-//    self.backgroundColor = [UIColor redColor];
     }
 }
 
 -(void)createContent;
 {
+    
     [self configBackgroundNode];
+    [self showTest];
+
+}
+
+
+-(void)showTest;
+{
+    
+    node = [SKShapeNode shapeNodeWithRect:CGRectMake(20, 20, 40, 40)];
+    node.fillColor = [SKColor blueColor];
+//    node.position
+    [self addChild:node];
     
 }
+//
+//-(void)didFinishUpdate;
+//{
+//    NSLog(@"self");
+//
+//}
 
 -(void)configBackgroundNode;
 {
-//    SKTexture *texture = [SKTexture textureWithImageNamed:@"continent0"];
-    
-//    SKLabelNode *backgroundNode = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-//    backgroundNode.text = @"Hello, World!";
-
     backgroundNode = [[SKSpriteNode alloc]initWithImageNamed:@"continent0"];
-    backgroundNode.position = CGPointMake(100, 220);
+//    backgroundNode.anchorPoint = CGPointMake(0.5f, 0.5f);
+    backgroundNode.anchorPoint = CGPointMake(0.5,0.5);
+//    backgroundNode.position = CGPointMake(100, 220);
 //    backgroundNode.position = CGPointMake(CGRectGetMidX(self.frame),
 //                                   CGRectGetMidY(self.frame));
 
 //    backgroundNode.name = @"tsn";
     
     [self addChild:backgroundNode];
-    CGPoint point =  CGPointMake(700 - backgroundNode.size.width/2 -23, 330-backgroundNode.size.height/2+268);
+//    CGPoint point =  CGPointMake(700 - backgroundNode.size.width/2 -23, 330-backgroundNode.size.height/2+268);
 //    CGPoint x = [self.view convertPoint:point toScene:self];
     iconNode = [[SKSpriteNode alloc]initWithImageNamed:@"Instance_location"];
-    iconNode.position = point;
+    iconNode.position = CGPointZero;
+//    iconNode.position = point;
     [backgroundNode addChild:iconNode];
     
     [self loadStepData];
@@ -64,21 +81,82 @@
 }
 
 
+-(BOOL)findEventBigo;
+{
+    BOOL eventHappen = [self getRandomNumber:1 to:100] < 25;
+    return eventHappen;
+}
+
+-(int)getRandomNumber:(int)from to:(int)to
+
+{
+    return (int)(from + (arc4random() % (to-from + 1)));
+}
+
+
+-(void)gotoPoint:(CGPoint)point withTimeRemain:(int)second;
+{
+    
+    NSMutableArray *sequceArr = [[NSMutableArray alloc]init];
+    
+    for (int i = 0 ;i< second; ) {
+        i++;
+        
+        SKAction *goAction = [SKAction moveTo:CGPointMake(point.x * i /second, point.y *i /second) duration:1];
+        [iconNode runAction:goAction];
+//
+        continue;
+        
+        BOOL eventBingo = [self findEventBigo];
+        if (eventBingo) {
+            [self showEventTipWithComplete:^{
+                [self gotoPoint:CGPointMake((i) *point.x /second, (i) *point.y /second) withTimeRemain:second-i];
+            }];
+            break;
+            
+        } else {
+            SKAction *goAction = [SKAction moveTo:CGPointMake(point.x * i /second, point.y *i /second) duration:1];
+            [iconNode runAction:goAction];
+        }
+    }
+    
+}
+
+-(void)showEventTipWithComplete:(void (^)(void))completeBlock;
+{
+    SKLabelNode *labelNode = [[SKLabelNode alloc]initWithFontNamed:@"Cochin"];
+    labelNode.text = [NSString stringWithFormat:@"获奖啦"];
+    labelNode.fontSize = 15;
+    labelNode.fontColor = [SKColor redColor];
+    labelNode.position = CGPointMake(iconNode.position.x,iconNode.position.y-30);
+    [backgroundNode addChild:labelNode];
+    if (completeBlock) {
+        completeBlock ();
+    }
+
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
+        
+        CGPoint backlocation = [touch locationInNode:backgroundNode];
+
        BOOL hit =  [goBtn containsPoint:location];
         if (hit) {
-            SKAction *goAction = [SKAction sequence:@[
-                                                      [SKAction moveTo:CGPointMake(778.5-backgroundNode.size.width/2 -23, 335-backgroundNode.size.height/2+268) duration:2],
-                                                      [SKAction waitForDuration:0.2],
-                                                      [SKAction moveTo:CGPointMake(860-backgroundNode.size.width/2 -23, 320-backgroundNode.size.height/2+268) duration:1]
-                                                      ]];
-            
-            [iconNode runAction:goAction];
+            int second = 4;
+            CGPoint movePoint  = [iconNode convertPoint:CGPointMake(100, 7) toNode:backgroundNode] ;
+            [self gotoPoint:movePoint withTimeRemain:second];
+        }
+        
+        BOOL hitIconNode = [iconNode containsPoint:backlocation];
+//        BOOL hitIconNode = [iconNode containsPoint:[iconNode ]];
+        if (hitIconNode) {
+            SKScene * mainSence = [[CHDXCityMainSence alloc] initWithSize:self.size];
+            SKTransition *doors= [SKTransition flipHorizontalWithDuration:0.5];
+            [self.view presentScene:mainSence transition:doors];
 
-            
         }
     }
 }
@@ -104,15 +182,18 @@
     [goBtn runAction:walkAnimation];
     
     
+    SKAudioNode *audioNode = [[SKAudioNode alloc]initWithFileNamed:@"bgMusic_night_1.mp3"];
+    [audioNode autoplayLooped];
+    [self addChild:audioNode];
+    
     
 }
+
 -(void)loadStepData;
 {
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     
     NSDateComponents *dateCom = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
-    
-    
     
     NSDate *startDate, *endDate;
     
@@ -140,39 +221,28 @@
                                        
                                        NSNumber  *stepCount = [NSNumber numberWithDouble:[[obj sumQuantity]doubleValueForUnit:[HKUnit countUnit]]];
                                        
-                                       SKLabelNode *labelStepCountNode = [[SKLabelNode alloc]initWithFontNamed:@"Chalkduster"];
+                                       labelStepCountNode = [[SKLabelNode alloc]initWithFontNamed:@"Chalkduster"];
                                        
                                        labelStepCountNode.text = [NSString stringWithFormat:@"%d", [stepCount intValue]];
                                        labelStepCountNode.fontSize = 15;
                                        labelStepCountNode.fontColor = [SKColor redColor];
-//                                       labelStepCountNode.position = CGPointMake(-40 + backgroundNode.size.width/2, 40 -backgroundNode.size.height /2 );
                                        labelStepCountNode.position = CGPointMake(CGRectGetMaxX(self.scene.frame)-25,
                                                                                  CGRectGetMinY(self.scene.frame)+50);
-
-                                       
-//                                       SKTexture *texture = [SKTextureAtlas ]
-                                       
-                                       
-                                       
-                                       
-                                       
                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                           
                                            [self configPointIcon];
-
                                            [self.scene addChild:labelStepCountNode];
-                                           
-                                           
-
-
                                        });
-                                       
-//                                       NSLog(@"%f" ,stepCount);
-                                       
                                    }];
                                }
                            }
                          statisticsUpdateHandler:^(HKStatisticsCollectionQuery * _Nonnull query, HKStatistics * _Nullable statistics, HKStatisticsCollection * _Nullable collection) {
-                             NSLog(@"query %@ collection %@",query,collection);
+                             
+                             NSNumber  *stepCount = [NSNumber numberWithDouble:[[statistics sumQuantity]doubleValueForUnit:[HKUnit countUnit]]];
+                             labelStepCountNode.text = [NSString stringWithFormat:@"%d", [stepCount intValue]];
+//
+//
+//                             NSLog(@"query %@ collection %@",query,collection);
                              
                          }
                                      withFailure:^(HKStatisticsCollectionQuery * _Nonnull query, HKStatisticsCollection * _Nullable result, NSError * _Nullable error) {
@@ -183,14 +253,9 @@
 
 }
 
-//-(void)configPersonIconNode;
-//{
-//
-//}
+-(void)update:(NSTimeInterval)currentTime;
+{
 
-//-(void)update:(CFTimeInterval)currentTime {
-//}
+}
 
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//}
 @end

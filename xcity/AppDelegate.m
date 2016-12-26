@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface AppDelegate ()
 
@@ -17,8 +18,48 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [WXApi registerApp:@"wx886247504e41fca8"];
+    
+    [self sendAuthRequest];
+    
+    
     return YES;
 }
+
+
+-(void)sendAuthRequest
+{
+    //构造SendAuthReq结构体
+    SendAuthReq* req =[[SendAuthReq alloc ] init ]  ;
+    req.scope = @"snsapi_userinfo";
+    req.state = @"123";
+    //第三方向微信终端发送一个SendAuthReq消息结构
+    [WXApi sendReq:req];
+}
+
+-(void) onResp:(BaseResp*)resp;
+{
+    NSLog(@"resp %@",resp);
+    
+    if ([resp isKindOfClass:[SendAuthResp class]]) {
+        [self sendRequestByAFNetworkingWithCode:[((SendAuthResp *)resp) code]];
+
+    }
+}
+
+
+-(void)sendRequestByAFNetworkingWithCode:(NSString *)code;
+{
+    NSString *urlString = [NSString stringWithFormat:@"http://192.168.145.47:8066/api/wechat/snsapi_base/%@",code];
+    
+    
+    NSURLSessionDataTask *task = [[AFHTTPSessionManager manager]dataTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]] completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        NSLog(@"NSURLResponse * _Nonnull response %@, id  _Nullable responseObject %@, NSError * _Nullable error %@", response, responseObject, error);
+    }];
+    [task resume];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -124,4 +165,16 @@
     }
 }
 
+#pragma mark -
+#pragma mark UIApplicationDelegate
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url;
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nonnull id)annotation;
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
 @end

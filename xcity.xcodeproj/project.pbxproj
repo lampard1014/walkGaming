@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		775AE367100EDCDD2A4D00B2 /* libPods-xcity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D81267F55307A9597024F0B /* libPods-xcity.a */; };
+		E51AFADB1DD060A70072093B /* bgMusic_night_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E51AFADA1DD060A60072093B /* bgMusic_night_1.mp3 */; };
+		E51AFADE1DD0727D0072093B /* CHDXCityMainSence.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AFADD1DD0727D0072093B /* CHDXCityMainSence.m */; };
 		E5216AAC1DD00C2E00F30C26 /* CHDXCityMainSenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5216AAB1DD00C2E00F30C26 /* CHDXCityMainSenceViewController.m */; };
 		E5216AAF1DD00D2500F30C26 /* CHDXCityMapSence.m in Sources */ = {isa = PBXBuildFile; fileRef = E5216AAE1DD00D2500F30C26 /* CHDXCityMapSence.m */; };
 		E53A503B1DC76FED0007B073 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E53A503A1DC76FED0007B073 /* main.m */; };
@@ -16,12 +19,26 @@
 		E53A50471DC76FED0007B073 /* xcity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E53A50451DC76FED0007B073 /* xcity.xcdatamodeld */; };
 		E53A50491DC76FED0007B073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E53A50481DC76FED0007B073 /* Assets.xcassets */; };
 		E53A504C1DC76FED0007B073 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E53A504A1DC76FED0007B073 /* LaunchScreen.storyboard */; };
+		E55454E21E10DF970072884F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55454E11E10DF970072884F /* SystemConfiguration.framework */; };
+		E55454E41E10DFA00072884F /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E55454E31E10DFA00072884F /* libz.1.1.3.tbd */; };
+		E55454E61E10DFA60072884F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E55454E51E10DFA60072884F /* libsqlite3.0.tbd */; };
+		E55454E81E10DFAE0072884F /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E55454E71E10DFAE0072884F /* libc++.1.tbd */; };
+		E55454EA1E10DFB50072884F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55454E91E10DFB50072884F /* Security.framework */; };
+		E55454EC1E10DFBA0072884F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55454EB1E10DFBA0072884F /* CoreTelephony.framework */; };
+		E55454EE1E10DFC00072884F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E55454ED1E10DFC00072884F /* CFNetwork.framework */; };
+		E55454F41E10E0630072884F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E55454F01E10E0630072884F /* libWeChatSDK.a */; };
 		E5609CB31DC884AB00B33375 /* CHDXCityCoreService.m in Sources */ = {isa = PBXBuildFile; fileRef = E5609CB21DC884AB00B33375 /* CHDXCityCoreService.m */; };
 		E5609CB81DC888B500B33375 /* CHDXCityHKService.m in Sources */ = {isa = PBXBuildFile; fileRef = E5609CB71DC888B500B33375 /* CHDXCityHKService.m */; };
 		E5FB6B1A1DC775B600B9ECE7 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FB6B191DC775B600B9ECE7 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		38F59DA7AB3A55BBC3B480EB /* Pods-xcity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xcity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-xcity/Pods-xcity.debug.xcconfig"; sourceTree = "<group>"; };
+		74F5450200AEC822665F26AF /* Pods-xcity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xcity.release.xcconfig"; path = "Pods/Target Support Files/Pods-xcity/Pods-xcity.release.xcconfig"; sourceTree = "<group>"; };
+		7D81267F55307A9597024F0B /* libPods-xcity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xcity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E51AFADA1DD060A60072093B /* bgMusic_night_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgMusic_night_1.mp3; sourceTree = "<group>"; };
+		E51AFADC1DD0727C0072093B /* CHDXCityMainSence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDXCityMainSence.h; sourceTree = "<group>"; };
+		E51AFADD1DD0727D0072093B /* CHDXCityMainSence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDXCityMainSence.m; sourceTree = "<group>"; };
 		E5216AAA1DD00C2E00F30C26 /* CHDXCityMainSenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDXCityMainSenceViewController.h; sourceTree = "<group>"; };
 		E5216AAB1DD00C2E00F30C26 /* CHDXCityMainSenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDXCityMainSenceViewController.m; sourceTree = "<group>"; };
 		E5216AAD1DD00D2500F30C26 /* CHDXCityMapSence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDXCityMapSence.h; sourceTree = "<group>"; };
@@ -38,6 +55,17 @@
 		E53A504B1DC76FED0007B073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E53A504D1DC76FED0007B073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		E53A50551DC7733A0007B073 /* xcity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = xcity.entitlements; path = ../xcity.entitlements; sourceTree = "<group>"; };
+		E55454E11E10DF970072884F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E55454E31E10DFA00072884F /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
+		E55454E51E10DFA60072884F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		E55454E71E10DFAE0072884F /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		E55454E91E10DFB50072884F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E55454EB1E10DFBA0072884F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		E55454ED1E10DFC00072884F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E55454F01E10E0630072884F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		E55454F11E10E0630072884F /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		E55454F21E10E0630072884F /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		E55454F31E10E0630072884F /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		E5609CB11DC884AB00B33375 /* CHDXCityCoreService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDXCityCoreService.h; sourceTree = "<group>"; };
 		E5609CB21DC884AB00B33375 /* CHDXCityCoreService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDXCityCoreService.m; sourceTree = "<group>"; };
 		E5609CB41DC885AB00B33375 /* CHDXCityCoreServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDXCityCoreServiceProtocol.h; sourceTree = "<group>"; };
@@ -52,18 +80,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E55454EE1E10DFC00072884F /* CFNetwork.framework in Frameworks */,
+				E55454EC1E10DFBA0072884F /* CoreTelephony.framework in Frameworks */,
+				E55454F41E10E0630072884F /* libWeChatSDK.a in Frameworks */,
+				E55454EA1E10DFB50072884F /* Security.framework in Frameworks */,
+				E55454E81E10DFAE0072884F /* libc++.1.tbd in Frameworks */,
+				E55454E61E10DFA60072884F /* libsqlite3.0.tbd in Frameworks */,
+				E55454E41E10DFA00072884F /* libz.1.1.3.tbd in Frameworks */,
+				E55454E21E10DF970072884F /* SystemConfiguration.framework in Frameworks */,
 				E5FB6B1A1DC775B600B9ECE7 /* HealthKit.framework in Frameworks */,
+				775AE367100EDCDD2A4D00B2 /* libPods-xcity.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E122A00F8CA0C016090FD21D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				38F59DA7AB3A55BBC3B480EB /* Pods-xcity.debug.xcconfig */,
+				74F5450200AEC822665F26AF /* Pods-xcity.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E53A502D1DC76FED0007B073 = {
 			isa = PBXGroup;
 			children = (
 				E53A50381DC76FED0007B073 /* xcity */,
 				E53A50371DC76FED0007B073 /* Products */,
+				E55454E01E10DF970072884F /* Frameworks */,
+				E122A00F8CA0C016090FD21D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +147,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E55454E01E10DF970072884F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E55454ED1E10DFC00072884F /* CFNetwork.framework */,
+				E55454EB1E10DFBA0072884F /* CoreTelephony.framework */,
+				E55454E91E10DFB50072884F /* Security.framework */,
+				E55454E71E10DFAE0072884F /* libc++.1.tbd */,
+				E55454E51E10DFA60072884F /* libsqlite3.0.tbd */,
+				E55454E31E10DFA00072884F /* libz.1.1.3.tbd */,
+				E55454E11E10DF970072884F /* SystemConfiguration.framework */,
+				7D81267F55307A9597024F0B /* libPods-xcity.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E55454EF1E10E0630072884F /* ext */ = {
+			isa = PBXGroup;
+			children = (
+				E55454F01E10E0630072884F /* libWeChatSDK.a */,
+				E55454F11E10E0630072884F /* WechatAuthSDK.h */,
+				E55454F21E10E0630072884F /* WXApi.h */,
+				E55454F31E10E0630072884F /* WXApiObject.h */,
+			);
+			path = ext;
+			sourceTree = "<group>";
+		};
 		E5609CA61DC8822F00B33375 /* module */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +196,7 @@
 		E5609CA81DC8824600B33375 /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				E55454EF1E10E0630072884F /* ext */,
 				E5FB6B191DC775B600B9ECE7 /* HealthKit.framework */,
 			);
 			name = framework;
@@ -149,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				E53A50421DC76FED0007B073 /* Main.storyboard */,
+				E51AFADA1DD060A60072093B /* bgMusic_night_1.mp3 */,
 				E53A50481DC76FED0007B073 /* Assets.xcassets */,
 				E53A504A1DC76FED0007B073 /* LaunchScreen.storyboard */,
 			);
@@ -180,6 +256,8 @@
 		E5609CAE1DC883A200B33375 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				E51AFADC1DD0727C0072093B /* CHDXCityMainSence.h */,
+				E51AFADD1DD0727D0072093B /* CHDXCityMainSence.m */,
 				E5216AAD1DD00D2500F30C26 /* CHDXCityMapSence.h */,
 				E5216AAE1DD00D2500F30C26 /* CHDXCityMapSence.m */,
 			);
@@ -207,9 +285,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E53A50501DC76FED0007B073 /* Build configuration list for PBXNativeTarget "xcity" */;
 			buildPhases = (
+				0C56ADB9E49023F308BA9F08 /* 📦 Check Pods Manifest.lock */,
 				E53A50321DC76FED0007B073 /* Sources */,
 				E53A50331DC76FED0007B073 /* Frameworks */,
 				E53A50341DC76FED0007B073 /* Resources */,
+				1FFF9D257A16863284E35FD8 /* 📦 Embed Pods Frameworks */,
+				201AD1CDCA4CEB6A25F9228F /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,6 +348,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E51AFADB1DD060A70072093B /* bgMusic_night_1.mp3 in Resources */,
 				E53A504C1DC76FED0007B073 /* LaunchScreen.storyboard in Resources */,
 				E53A50491DC76FED0007B073 /* Assets.xcassets in Resources */,
 				E53A50441DC76FED0007B073 /* Main.storyboard in Resources */,
@@ -274,6 +356,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C56ADB9E49023F308BA9F08 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1FFF9D257A16863284E35FD8 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-xcity/Pods-xcity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		201AD1CDCA4CEB6A25F9228F /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-xcity/Pods-xcity-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E53A50321DC76FED0007B073 /* Sources */ = {
@@ -286,6 +416,7 @@
 				E53A503B1DC76FED0007B073 /* main.m in Sources */,
 				E5216AAC1DD00C2E00F30C26 /* CHDXCityMainSenceViewController.m in Sources */,
 				E53A50471DC76FED0007B073 /* xcity.xcdatamodeld in Sources */,
+				E51AFADE1DD0727D0072093B /* CHDXCityMainSence.m in Sources */,
 				E5609CB81DC888B500B33375 /* CHDXCityHKService.m in Sources */,
 				E5609CB31DC884AB00B33375 /* CHDXCityCoreService.m in Sources */,
 			);
@@ -399,6 +530,7 @@
 		};
 		E53A50511DC76FED0007B073 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38F59DA7AB3A55BBC3B480EB /* Pods-xcity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = xcity/xcity.entitlements;
@@ -407,6 +539,16 @@
 				INFOPLIST_FILE = xcity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/xcity",
+					"$(PROJECT_DIR)/xcity/ext",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Objc",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chd.game.xcity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2da9b3fd-f850-49f6-b900-9d458b74a1c3";
@@ -415,6 +557,7 @@
 		};
 		E53A50521DC76FED0007B073 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74F5450200AEC822665F26AF /* Pods-xcity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = xcity/xcity.entitlements;
@@ -423,6 +566,16 @@
 				INFOPLIST_FILE = xcity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/xcity",
+					"$(PROJECT_DIR)/xcity/ext",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Objc",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chd.game.xcity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2da9b3fd-f850-49f6-b900-9d458b74a1c3";
