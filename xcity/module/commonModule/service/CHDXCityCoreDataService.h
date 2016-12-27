@@ -6,10 +6,22 @@
 //  Copyright © 2016年 Lampard Hong. All rights reserved.
 //
 
-#import "XMBaseService.h"
-@class XMBase;
-
+#import "CHDXCityBaseService.h"
 #import <CoreData/CoreData.h>
+
+
+@class CHDXCityBase;
+
+
+FOUNDATION_EXPORT NSString * const CHDXCityManagedObjectModelName;
+
+FOUNDATION_EXPORT NSString * const configurationName_SaveInSqlite;
+
+FOUNDATION_EXPORT NSString * const configurationName_SaveInMemory;
+
+FOUNDATION_EXPORT NSString * const configurationName_Default;
+
+
 /**
  *  @author Lampard Hong, 16-01-18 10:01:09
  *
@@ -17,7 +29,7 @@
  *
  *  @since 1.0
  */
-@interface XMCoreDataService : XMBaseService
+@interface CHDXCityCoreDataService : CHDXCityBaseService
 
 /**
  *  @author Lampard Hong, 16-01-18 10:01:28
@@ -89,9 +101,9 @@
  *
  *  @since 1.0
  */
--(XMBase *)initaializeManagedObjectWithCls:(Class)class;
+-(CHDXCityBase *)initaializeManagedObjectWithCls:(Class)class;
 
--(XMBase *)initaializeManagedObjectWithCls:(Class)class withMoc:(NSManagedObjectContext *)moc;
+-(CHDXCityBase *)initaializeManagedObjectWithCls:(Class)class withMoc:(NSManagedObjectContext *)moc;
 
 /**
  *  @author yomyoutama, 16-03-16 10:03:44
@@ -102,7 +114,7 @@
  *
  *  @return the copy one
  */
-- (XMBase *)copyManageObjectBy:(XMBase *)obj;
+- (CHDXCityBase *)copyManageObjectBy:(CHDXCityBase *)obj;
 
 
 /**
@@ -120,15 +132,15 @@
 /**
  *  @author yomyoutama, 16-06-14 09:06:37
  *
- *  @brief  生成已赋值的特定的XMBase子类对象
+ *  @brief  生成已赋值的特定的CHDXCityBase子类对象
  *
  *  @param responseObject 赋值object
  *  @param className      需生成的目标子类
  *  @param relationMap    relationship的特殊映射关系
  *
- *  @return 解析返回内存中的XMBase子类对象
+ *  @return 解析返回内存中的CHDXCityBase子类对象
  */
-- (XMBase *)parseResponseWithResponseObject:(id)responseObject
+- (CHDXCityBase *)parseResponseWithResponseObject:(id)responseObject
                              withParseClass:(Class)className
                             withRelationMap:(NSDictionary <NSString *, NSString *>*)relationMap;
 

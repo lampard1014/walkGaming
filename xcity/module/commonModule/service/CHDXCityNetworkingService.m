@@ -1,24 +1,42 @@
 //
-//  XMNetworkingService.m
+//  CHDXCityNetworkingService.m
 //  ECoupon
 //
 //  Created by 余妙玉 on 16/6/1.
 //  Copyright © 2016年 Xkeshi. All rights reserved.
 //
 
-#import "XMNetworkingService.h"
+#import "CHDXCityNetworkingService.h"
 
 #import <AFNetworking/AFNetworking.h>
 
-#import "XMSignatureService.h"
-#import "XMCoreDataService.h"
+#import "CHDXCitySignatureService.h"
+#import "CHDXCityCoreDataService.h"
 #import "XKSEncryptor.h"
 
-#import "XMCommonResponse.h"
+#import "CHDXCityCommonResponse+CoreDataClass.h"
+
+
+
+
+
+
+
+NSString * const successResponseCode = @"0";
 
 NSString * const XAppTypeCommonForIPhoneString        = @"x-mobile-marketing-ios";
 
-static NSString *XMNetworkingServiceRawResponseData = @"XMNetworkingServiceRawResponseData";
+NSString * const exception_unbindRespnoseCode = @"S_1001";
+
+NSString * const CHDXCityNetworkingService_unbindRespnoseNotification = @"CHDXCityNetworkingService_unbindRespnoseNotification";
+
+NSString * const CHDXCityNetworkingServiceRawResponseData = @"CHDXCityNetworkingServiceRawResponseData";
+
+NSString * const kHttpMethod = @"kErrorMethod";
+NSString * const kSignatureError = @"kSignatureError";
+NSString * const kErrorResult = @"kErrorResult";
+NSString * const kNetworkingRechbility = @"kNetworkingRechbility";
+NSString * const kCHDXCityNetworkingServiceErrorDomain = @"com.NetworkingError.CHDXCity";
 
 #pragma mark -
 #pragma mark add custom AFJSONRequestSerializer
@@ -74,11 +92,11 @@ static NSString *XMNetworkingServiceRawResponseData = @"XMNetworkingServiceRawRe
 #pragma mark -
 #pragma mark add custom response serializer
 
-@interface XMNetworkingServiceJsonResponseSerialize : AFJSONResponseSerializer
+@interface CHDXCityNetworkingServiceJsonResponseSerialize : AFJSONResponseSerializer
 
 @end
 
-@implementation XMNetworkingServiceJsonResponseSerialize
+@implementation CHDXCityNetworkingServiceJsonResponseSerialize
 
 - (id)responseObjectForResponse:(NSURLResponse *)response
                            data:(NSData *)data
@@ -98,7 +116,7 @@ static NSString *XMNetworkingServiceRawResponseData = @"XMNetworkingServiceRawRe
     } else {
         NSMutableDictionary *rawData = [[NSMutableDictionary alloc]initWithDictionary:(NSDictionary *)superData];
         if (data && [data length]) {
-            [rawData setObject:data forKey:XMNetworkingServiceRawResponseData];
+            [rawData setObject:data forKey:CHDXCityNetworkingServiceRawResponseData];
         }
         return rawData;
     }
@@ -111,21 +129,21 @@ static NSString *XMNetworkingServiceRawResponseData = @"XMNetworkingServiceRawRe
 
 
 
-static XMNetworkingService *shareInstance;
+static CHDXCityNetworkingService *shareInstance;
 
-@interface XMNetworkingService(){
+@interface CHDXCityNetworkingService(){
 }
 @property (nonatomic, strong)AFHTTPSessionManager *manager;
 
 - (NSDictionary *)fetchHeaderDictionary;
 @end
 
-@implementation XMNetworkingService
-+ (instancetype(^)(void))shareInstanceWithConfig:(XMBaseServiceConfigurationObject *)config;
+@implementation CHDXCityNetworkingService
++ (instancetype(^)(void))shareInstanceWithConfig:(CHDXCityBaseServiceConfigurationObject *)config;
 {
     static dispatch_once_t predicate;
     
-    return ^XMNetworkingService *{
+    return ^CHDXCityNetworkingService *{
         
         if (!shareInstance) {
             dispatch_once(&predicate, ^{
@@ -139,13 +157,13 @@ static XMNetworkingService *shareInstance;
     };
 }
 
-- (void)basicInitWithConfiguration:(XMBaseServiceConfigurationObject *)configuration;
+- (void)basicInitWithConfiguration:(CHDXCityBaseServiceConfigurationObject *)configuration;
 {
     self.manager = [AFHTTPSessionManager manager];
     self.manager.securityPolicy.allowInvalidCertificates = YES;
     self.manager.requestSerializer = [XNetworkManagerJSONRequestSerializer serializer];
-    self.manager.responseSerializer = [XMNetworkingServiceJsonResponseSerialize serializer];
-    self.manager.requestSerializer.timeoutInterval = XM_NetworkRequest_Timeout;
+    self.manager.responseSerializer = [CHDXCityNetworkingServiceJsonResponseSerialize serializer];
+    self.manager.requestSerializer.timeoutInterval = 30;
     NSDictionary *headerDictionary = [self fetchHeaderDictionary];
     if (headerDictionary && [headerDictionary count]) {
         [headerDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -162,20 +180,20 @@ static XMNetworkingService *shareInstance;
              };
 }
 
-- (NSString *)fetchHttpMethodDescriptionWithHttpMethod:(XMHTTPMethod)httpMethod;
+- (NSString *)fetchHttpMethodDescriptionWithHttpMethod:(CHDXCityHTTPMethod)httpMethod;
 {
     switch (httpMethod) {
-        case XMHTTPMethod_Get:
+        case CHDXCityHTTPMethod_Get:
             return @"GET";
-        case XMHTTPMethod_Head:
+        case CHDXCityHTTPMethod_Head:
             return @"HEAD";
-        case XMHTTPMethod_Post:
+        case CHDXCityHTTPMethod_Post:
             return @"POST";
-        case XMHTTPMethod_Put:
+        case CHDXCityHTTPMethod_Put:
             return @"PUT";
-        case XMHTTPMethod_Delete:
+        case CHDXCityHTTPMethod_Delete:
             return @"DELETE";
-        case XMHTTPMethod_Trace:
+        case CHDXCityHTTPMethod_Trace:
             return @"TRACE";
         default:
             return nil;
@@ -217,9 +235,9 @@ static XMNetworkingService *shareInstance;
 
 - (void)dataTaskWithUrl:(NSString *)url
                  params:(NSDictionary *)params
-             httpMethod:(XMHTTPMethod)httpMethod
-                success:(void (^)(NSURLSessionDataTask *task, XMCommonResponse *response))success
-                failure:(void (^)(NSURLSessionDataTask *task, NSError *error, XMCommonResponse *response))failure
+             httpMethod:(CHDXCityHTTPMethod)httpMethod
+                success:(void (^)(NSURLSessionDataTask *task, CHDXCityCommonResponse *response))success
+                failure:(void (^)(NSURLSessionDataTask *task, NSError *error, CHDXCityCommonResponse *response))failure
         withRelationMap:(NSDictionary <NSString *, NSString *>*)relationMap
          uploadProgress:(void (^)(NSProgress *uploadProgress)) uploadProgress
        downloadProgress:(void (^)(NSProgress *downloadProgress)) downloadProgress;
@@ -236,13 +254,13 @@ static XMNetworkingService *shareInstance;
     //CheckReachbility
     NSString *reachbility = AFNetworkReachabilityStatusNotReachable == self.manager.reachabilityManager.networkReachabilityStatus ? nil : kNetworkingRechbility;
 
-    if (![self vaildateNoEmptyParametersWithParamtersKey:kNetworkingRechbility withParameterVaule:reachbility errorLevel:XMServiceErrorLevel_FaildBlock withFailure:failure]) {
+    if (![self vaildateNoEmptyParametersWithParamtersKey:kNetworkingRechbility withParameterVaule:reachbility errorLevel:CHDXCityServiceErrorLevel_FaildBlock withFailure:failure]) {
         return;
     }
     
     //Check Signature
     
-    XMSignatureService * signatureService = [XMSignatureService shareInstanceWithConfig:nil]();
+    CHDXCitySignatureService * signatureService = [CHDXCitySignatureService shareInstanceWithConfig:nil]();
     NSDictionary *signDic = [signatureService signDataWithUrl:url withParams:params withHttpMethod:httpMethod];
     if (signDic) {
         //签名成功
@@ -313,7 +331,7 @@ static XMNetworkingService *shareInstance;
                                              if ([signatureService vaildateEnable] && [response isKindOfClass:[NSHTTPURLResponse class]]) {
                                                  NSError *vaildateSignError = nil;
                                                  
-                                                 NSString *responseString = (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[XMNetworkingServiceRawResponseData]) ? [[NSString alloc]initWithData:responseObject[XMNetworkingServiceRawResponseData] encoding:NSUTF8StringEncoding] : nil;
+                                                 NSString *responseString = (responseObject && [responseObject isKindOfClass:[NSDictionary class]] && responseObject[CHDXCityNetworkingServiceRawResponseData]) ? [[NSString alloc]initWithData:responseObject[CHDXCityNetworkingServiceRawResponseData] encoding:NSUTF8StringEncoding] : nil;
                                                  
                                                 BOOL vaildateResponse = [XKSEncryptor validateResponseString:responseString header:((NSHTTPURLResponse *)response).allHeaderFields error:&vaildateSignError];
                                                  
@@ -322,7 +340,7 @@ static XMNetworkingService *shareInstance;
                                                          NSMutableDictionary *errorDictionary =  [NSMutableDictionary dictionaryWithDictionary: vaildateSignError.userInfo];
                                                          errorDictionary[NSLocalizedDescriptionKey] = [weakself serverDiscription][kSignatureError][NSLocalizedDescriptionKey];
                                                          
-                                                         NSError *failureError = vaildateSignError ?[NSError errorWithDomain:vaildateSignError.domain code:[[weakself serverDiscription][kSignatureError][@"code"]integerValue] userInfo:errorDictionary]:[NSError errorWithDomain:kXMNetworkingServiceErrorDomain code:[kXMNetworkingServiceErrorDomain integerValue] userInfo:errorDictionary];
+                                                         NSError *failureError = vaildateSignError ?[NSError errorWithDomain:vaildateSignError.domain code:[[weakself serverDiscription][kSignatureError][@"code"]integerValue] userInfo:errorDictionary]:[NSError errorWithDomain:kCHDXCityNetworkingServiceErrorDomain code:[kCHDXCityNetworkingServiceErrorDomain integerValue] userInfo:errorDictionary];
                                                          
                                                          failure(dataTask, failureError, nil);
                                                      }
@@ -330,9 +348,9 @@ static XMNetworkingService *shareInstance;
                                                  }
                                              }
                                              
-                                             XMCoreDataService *coredataService = [XMCoreDataService shareInstanceWithConfig:nil]();
+                                             CHDXCityCoreDataService *coredataService = [CHDXCityCoreDataService shareInstanceWithConfig:nil]();
                                              
-                                             XMCommonResponse *responseMo = (XMCommonResponse *)[coredataService parseResponseWithResponseObject:responseObject withParseClass:[XMCommonResponse class] withRelationMap:relationMap];
+                                             CHDXCityCommonResponse *responseMo = (CHDXCityCommonResponse *)[coredataService parseResponseWithResponseObject:responseObject withParseClass:[CHDXCityCommonResponse class] withRelationMap:relationMap];
                                              
                                              if ([successResponseCode isEqualToString: [responseObject objectForKey:@"code"]]) {
                                                  if (success) {
@@ -340,7 +358,7 @@ static XMNetworkingService *shareInstance;
                                                  }
                                              } else if ([exception_unbindRespnoseCode isEqualToString:[responseObject objectForKey:@"code"]]) {
                                                                                                   
-                                                 [[NSNotificationCenter defaultCenter]postNotificationName:XMNetworkingService_unbindRespnoseNotification object:self userInfo:nil];
+                                                 [[NSNotificationCenter defaultCenter]postNotificationName:CHDXCityNetworkingService_unbindRespnoseNotification object:self userInfo:nil];
                                                  
                                                  if (failure) {
                                                      
@@ -348,7 +366,7 @@ static XMNetworkingService *shareInstance;
                                                      if (responseMo && [responseMo desc]) {
                                                          userInfo[NSLocalizedFailureReasonErrorKey] = [responseMo desc];
                                                      }
-                                                     NSError *error = [NSError errorWithDomain:kXMNetworkingServiceErrorDomain
+                                                     NSError *error = [NSError errorWithDomain:kCHDXCityNetworkingServiceErrorDomain
                                                                                           code:[[self serverDiscription][exception_unbindRespnoseCode][@"code"] integerValue]
                                                                                       userInfo:userInfo];
                                                      failure(dataTask, error, responseMo);
@@ -360,8 +378,8 @@ static XMNetworkingService *shareInstance;
                                                      if (responseMo && [responseMo desc]) {
                                                          userInfo[NSLocalizedFailureReasonErrorKey] = [responseMo desc];
                                                      }
-                                                     NSError *error = [NSError errorWithDomain:kXMNetworkingServiceErrorDomain
-                                                                                          code:[kXMNetworkingServiceErrorDomain integerValue]
+                                                     NSError *error = [NSError errorWithDomain:kCHDXCityNetworkingServiceErrorDomain
+                                                                                          code:[kCHDXCityNetworkingServiceErrorDomain integerValue]
                                                                                       userInfo:userInfo];
                                                      failure(dataTask, error, responseMo);
                                                  }
@@ -377,20 +395,20 @@ static XMNetworkingService *shareInstance;
 #pragma mark -
 #pragma mark http method vaildate
 
--(BOOL)vaildateHttpMethodWithHttpMethod:(XMHTTPMethod)httpMethod
-                                failure:(void (^)(NSURLSessionDataTask *task, NSError *error, XMCommonResponse *response))failure
+-(BOOL)vaildateHttpMethodWithHttpMethod:(CHDXCityHTTPMethod)httpMethod
+                                failure:(void (^)(NSURLSessionDataTask *task, NSError *error, CHDXCityCommonResponse *response))failure
 ;{
     BOOL vaildateResult = YES;
     NSString *methodDesc = [self fetchHttpMethodDescriptionWithHttpMethod:httpMethod];
     if (!methodDesc) {
-        if (XMServiceErrorLevel_Default == self.serviceConfiguration.errorLevel) {
+        if (CHDXCityServiceErrorLevel_Default == self.serviceConfiguration.errorLevel) {
             return vaildateResult = NO;
-        } else if (XMServiceErrorLevel_Assert == self.serviceConfiguration.errorLevel) {
+        } else if (CHDXCityServiceErrorLevel_Assert == self.serviceConfiguration.errorLevel) {
             NSAssert(methodDesc, [self serverDiscription][kHttpMethod][NSLocalizedFailureReasonErrorKey]);
             return vaildateResult = NO;
-        } else if (XMServiceErrorLevel_FaildBlock == self.serviceConfiguration.errorLevel) {
+        } else if (CHDXCityServiceErrorLevel_FaildBlock == self.serviceConfiguration.errorLevel) {
             if (failure) {
-                NSError *error = [self createServiceErrorWithDomain:kXMNetworkingServiceErrorDomain withErrorCode: [[self serverDiscription][kHttpMethod][@"code"]integerValue] withErrorUserInfo:[self serverDiscription][kHttpMethod]];
+                NSError *error = [self createServiceErrorWithDomain:kCHDXCityNetworkingServiceErrorDomain withErrorCode: [[self serverDiscription][kHttpMethod][@"code"]integerValue] withErrorUserInfo:[self serverDiscription][kHttpMethod]];
                 failure(nil, error, nil);
             }
             return vaildateResult = NO;
@@ -402,12 +420,12 @@ static XMNetworkingService *shareInstance;
 #pragma mark - 
 #pragma mark signature 
 
-- (BOOL)needEncodingParametersInURIWithHTTPMethod:(XMHTTPMethod)HTTPMethod
+- (BOOL)needEncodingParametersInURIWithHTTPMethod:(CHDXCityHTTPMethod)HTTPMethod
 {
     switch (HTTPMethod) {
-        case XMHTTPMethod_Get:
-        case XMHTTPMethod_Head:
-        case XMHTTPMethod_Delete:
+        case CHDXCityHTTPMethod_Get:
+        case CHDXCityHTTPMethod_Head:
+        case CHDXCityHTTPMethod_Delete:
             return YES;
         default:
             return NO;

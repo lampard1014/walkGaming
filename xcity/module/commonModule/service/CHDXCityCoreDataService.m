@@ -6,19 +6,19 @@
 //  Copyright © 2016年 Lampard Hong. All rights reserved.
 //
 
-#import "XMCoreDataService.h"
-#import "XMBase.h"
+#import "CHDXCityCoreDataService.h"
+#import "CHDXCityBase+CoreDataClass.h"
 
-static NSString *XMManagedObjectModelName = @"XMDataModel";
+NSString * const CHDXCityManagedObjectModelName = @"CHDXCityDataModel";
 
-static NSString *configurationName_SaveInSqlite = @"SaveInSqlite";
+NSString * const configurationName_SaveInSqlite = @"SaveInSqlite";
 
-static NSString *configurationName_SaveInMemory = @"SaveInMemory";
+NSString * const configurationName_SaveInMemory = @"SaveInMemory";
 
-static NSString *configurationName_Default = @"Default";
+NSString * const configurationName_Default = @"Default";
 
 
-@interface XMCoreDataService(){
+@interface CHDXCityCoreDataService(){
     
 }
 
@@ -28,15 +28,15 @@ static NSString *configurationName_Default = @"Default";
 
 @end
 
-@implementation XMCoreDataService
+@implementation CHDXCityCoreDataService
 
-static XMCoreDataService *shareInstance;
+static CHDXCityCoreDataService *shareInstance;
 
-+ (instancetype(^)(void))shareInstanceWithConfig:(XMBaseServiceConfigurationObject *)config;
++ (instancetype(^)(void))shareInstanceWithConfig:(CHDXCityBaseServiceConfigurationObject *)config;
 {
     static dispatch_once_t predicate;
     
-    return ^XMCoreDataService *{
+    return ^CHDXCityCoreDataService *{
         
         if (!shareInstance) {
             dispatch_once(&predicate, ^{
@@ -51,7 +51,7 @@ static XMCoreDataService *shareInstance;
 }
 
 
--(void)basicInitWithConfiguration:(XMBaseServiceConfigurationObject *)configuration;
+-(void)basicInitWithConfiguration:(CHDXCityBaseServiceConfigurationObject *)configuration;
 {
     // setup managed object model
     [self managedObjectModel];
@@ -78,7 +78,7 @@ static XMCoreDataService *shareInstance;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 
-    NSURL *storeURL = [documentsURL URLByAppendingPathComponent:[XMManagedObjectModelName stringByAppendingPathExtension:@"sqlite"]];
+    NSURL *storeURL = [documentsURL URLByAppendingPathComponent:[CHDXCityManagedObjectModelName stringByAppendingPathExtension:@"sqlite"]];
     return storeURL;
 }
 
@@ -87,7 +87,7 @@ static XMCoreDataService *shareInstance;
 {
     if (!self.mom) {
         
-        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:XMManagedObjectModelName withExtension:@"momd"];
+        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:CHDXCityManagedObjectModelName withExtension:@"momd"];
         
         NSManagedObjectModel *_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
         
@@ -131,23 +131,23 @@ static XMCoreDataService *shareInstance;
 //    };
 }
 
--(XMBase *)initaializeManagedObjectWithCls:(Class)class;
+-(CHDXCityBase *)initaializeManagedObjectWithCls:(Class)class;
 {
     
     return class ? [self initaializeManagedObjectWithCls:class withMoc:self.mainMOC] : nil;
 }
 
 
--(XMBase *)initaializeManagedObjectWithCls:(Class)class withMoc:(NSManagedObjectContext *)moc;
+-(CHDXCityBase *)initaializeManagedObjectWithCls:(Class)class withMoc:(NSManagedObjectContext *)moc;
 {
     NSManagedObjectContext *processMoc = moc ? : [self mainMOC];
     
-    return ([class isSubclassOfClass:[XMBase class]]) ? [NSEntityDescription insertNewObjectForEntityForName:[class entityName] inManagedObjectContext:processMoc] : nil;
+    return ([class isSubclassOfClass:[CHDXCityBase class]]) ? [NSEntityDescription insertNewObjectForEntityForName:[class entityName] inManagedObjectContext:processMoc] : nil;
 }
 
-- (XMBase *)copyManageObjectBy:(XMBase *)obj;
+- (CHDXCityBase *)copyManageObjectBy:(CHDXCityBase *)obj;
 {
-    XMBase *emptyCopy = [self initaializeManagedObjectWithCls:[obj class]];
+    CHDXCityBase *emptyCopy = [self initaializeManagedObjectWithCls:[obj class]];
     __weak typeof(self)weakself = self;
     
     [[[emptyCopy entity]properties]enumerateObjectsUsingBlock:^(__kindof NSPropertyDescription * _Nonnull property, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -169,8 +169,8 @@ static XMCoreDataService *shareInstance;
                 __block NSMutableOrderedSet *newDestSet = [[NSMutableOrderedSet alloc]init];
                 
                 [[obj valueForKey:[property name]]enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if ([obj isKindOfClass:[XMBase class]]){
-                        XMBase *tempobj = [weakself copyManageObjectBy:(XMBase *)obj];
+                    if ([obj isKindOfClass:[CHDXCityBase class]]){
+                        CHDXCityBase *tempobj = [weakself copyManageObjectBy:(CHDXCityBase *)obj];
                         [newDestSet addObject:tempobj];
                     }
                 }];
@@ -287,14 +287,14 @@ static XMCoreDataService *shareInstance;
 
 }
 
-- (XMBase *)parseResponseWithResponseObject:(id)responseObject
+- (CHDXCityBase *)parseResponseWithResponseObject:(id)responseObject
                              withParseClass:(Class)className
                             withRelationMap:(NSDictionary <NSString *, NSString *>*)relationMap;
 {
     
-    XMBase *mo = (XMBase *)[self initaializeManagedObjectWithCls:className];
+    CHDXCityBase *mo = (CHDXCityBase *)[self initaializeManagedObjectWithCls:className];
     
-    if ([className isSubclassOfClass:[XMBase class]] && [responseObject isKindOfClass:[NSDictionary class]]) {
+    if ([className isSubclassOfClass:[CHDXCityBase class]] && [responseObject isKindOfClass:[NSDictionary class]]) {
         
         NSArray <__kindof NSPropertyDescription *> *modelProperties =  mo.entity.properties;
         
@@ -319,7 +319,7 @@ static XMCoreDataService *shareInstance;
                     NSMutableOrderedSet *orderSet = [[NSMutableOrderedSet alloc]initWithCapacity:[dataArr count]];
                     
                     [dataArr enumerateObjectsUsingBlock:^(id  _Nonnull dataArrData, NSUInteger idx, BOOL * _Nonnull stop) {
-                        XMBase *enumMo = nil;
+                        CHDXCityBase *enumMo = nil;
                         if (relationMap && relationMap[[obj name]]) {
                             enumMo = [self parseResponseWithResponseObject:dataArrData withParseClass:NSClassFromString(relationMap[[obj name]]) withRelationMap:relationMap];
                         } else {
@@ -334,7 +334,7 @@ static XMCoreDataService *shareInstance;
                     
                 } else {
                     //To one
-                    XMBase *enumMo = nil;
+                    CHDXCityBase *enumMo = nil;
                     if (relationMap && relationMap[[obj name]]) {
                         enumMo = [self parseResponseWithResponseObject:responseObject[realKey] withParseClass:NSClassFromString(relationMap[[obj name]]) withRelationMap:relationMap];
                     } else {

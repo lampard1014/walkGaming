@@ -1,4 +1,95 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2657" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CHDXCityBase" representedClassName=".XMBase" isAbstract="YES" syncable="YES"/>
+    <entity name="XMCommonResponse" representedClassName="XMCommonResponse" parentEntity="CHDXCityBase" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="XMCommonResponseResult" syncable="YES"/>
+    </entity>
+    <entity name="XMCommonResponseResult" representedClassName="XMCommonResponseResult" isAbstract="YES" parentEntity="CHDXCityBase" syncable="YES" codeGenerationType="class">
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="XMCommonResponse" syncable="YES"/>
+    </entity>
+    <entity name="XMCouponCheckResult" representedClassName="XMCouponCheckResult" parentEntity="XMCommonResponseResult" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="commen" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="ticketCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ticketName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ticketStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="ticketType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="validBeginTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="validEndTime" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="XMCouponVerificationResult" representedClassName="XMCouponVerificationResult" parentEntity="XMCommonResponseResult" syncable="YES" codeGenerationType="class">
+        <attribute name="descriptio" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="platformSerial" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="result" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="verifiedCodeLis" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="verifiedTime" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="XMLoginModel" representedClassName="XMLoginModel" parentEntity="XMTerminalBindResponseResult" syncable="YES" codeGenerationType="class">
+        <attribute name="deviceNumber" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="XMPaymentModeResponseResult" representedClassName="XMPaymentModeResponseResult" parentEntity="XMCommonResponseResult" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shopId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="shopName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="paymentChannels" optional="YES" toMany="YES" deletionRule="No Action" ordered="YES" destinationEntity="XMPaymentModeResponseResult_paymentChannels" syncable="YES"/>
+    </entity>
+    <entity name="XMPaymentModeResponseResult_paymentChannels" representedClassName="XMPaymentModeResponseResult_paymentChannels" parentEntity="CHDXCityBase" syncable="YES" codeGenerationType="class">
+        <attribute name="account" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="terminal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="paymentModeResponse" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="XMPaymentModeResponseResult" syncable="YES"/>
+    </entity>
+    <entity name="XMStatisticsResponseResult" representedClassName="XMStatisticsResponseResult" parentEntity="XMCommonResponseResult" syncable="YES" codeGenerationType="class">
+        <attribute name="discountAmount" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="totalAmount" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="totalCount" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="XMTerminalBindResponseResult" representedClassName="XMTerminalBindResponseResult" parentEntity="XMCommonResponseResult" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serialNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shopId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="shopName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="XMTransactionDetailResponseResult" representedClassName="XMTransactionDetailResponseResult" parentEntity="XMCommonResponseResult" syncable="YES" codeGenerationType="class">
+        <attribute name="actuallyAmount" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="amount" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="channelType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deductionAmount" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="discountType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="externalSerial" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentExternalSerial" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="posOrderId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="refundExternalSerial" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shopId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="tradeTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionType" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="XMUsers" representedClassName="XMUsers" parentEntity="CHDXCityBase" syncable="YES" codeGenerationType="class">
+        <attribute name="psw" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shopId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="XMCommonResponse" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="CHDXCityBase" positionX="-18" positionY="27" width="128" height="45"/>
+        <element name="XMPaymentModeResponseResult" positionX="0" positionY="45" width="128" height="120"/>
+        <element name="XMCommonResponseResult" positionX="18" positionY="63" width="128" height="60"/>
+        <element name="XMCouponVerificationResult" positionX="36" positionY="81" width="128" height="120"/>
+        <element name="XMLoginModel" positionX="-9" positionY="36" width="128" height="60"/>
+        <element name="XMStatisticsResponseResult" positionX="0" positionY="45" width="128" height="90"/>
+        <element name="XMTransactionDetailResponseResult" positionX="9" positionY="54" width="128" height="285"/>
+        <element name="XMUsers" positionX="18" positionY="63" width="128" height="75"/>
+        <element name="XMTerminalBindResponseResult" positionX="27" positionY="72" width="128" height="120"/>
+        <element name="XMCouponCheckResult" positionX="36" positionY="81" width="128" height="195"/>
+        <element name="XMPaymentModeResponseResult_paymentChannels" positionX="45" positionY="90" width="128" height="105"/>
+    </elements>
 </model>

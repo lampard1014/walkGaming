@@ -1,12 +1,15 @@
 //
-//  XMSignatureService.h
+//  CHDXCitySignatureService.h
 //  ECoupon
 //
 //  Created by 余妙玉 on 16/6/1.
 //  Copyright © 2016年 Xkeshi. All rights reserved.
 //
 
-#import "XMBaseService.h"
+#import "CHDXCityBaseService.h"
+
+
+
 
 
 /**
@@ -14,13 +17,13 @@
  *
  *  @brief  签名相关服务
  */
-@interface XMSignatureService : XMBaseService
+@interface CHDXCitySignatureService : CHDXCityBaseService
 /**
  *  @author yomyoutama, 16-06-16 13:06:25
  *
  *  @brief  验签和签名模式
  */
-@property (nonatomic, assign, getter = fetchXMXMSignatureType)XMXMSignatureType signatureType;
+@property (nonatomic, assign, getter = fetchCHDXCitySignatureType)CHDXCitySignatureType signatureType;
 
 /**
  *  @author yomyoutama, 16-06-16 13:06:59
@@ -35,7 +38,7 @@
  */
 -(NSDictionary *)signDataWithUrl:(NSString *)url
                       withParams:(NSDictionary *)params
-                  withHttpMethod:(XMHTTPMethod)httpMethod;
+                  withHttpMethod:(CHDXCityHTTPMethod)httpMethod;
 
 /**
  *  @author yomyoutama, 16-06-16 13:06:59

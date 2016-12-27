@@ -7,9 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "XMBaseServiceConfigurationObject.h"
-@class XMCommonResponse;
-@interface XMBaseService : NSObject
+#import "CHDXCityCommonModuleHeader.h"
+
+
+#import "CHDXCityBaseServiceConfigurationObject.h"
+
+@class CHDXCityCommonResponse;
+
+
+FOUNDATION_EXPORT NSString * const kCHDXCityBaseServiceErrorDomain;
+
+@interface CHDXCityBaseService : NSObject
 
 /**
  *  @author Lampard Hong, 16-01-07 20:01:22
@@ -18,7 +26,7 @@
  *
  *  @since 1.0
  */
-@property(nonatomic, strong)XMBaseServiceConfigurationObject *serviceConfiguration;
+@property(nonatomic, strong)CHDXCityBaseServiceConfigurationObject *serviceConfiguration;
 
 /**
  *  @author yomyoutama, 16-05-26 17:05:12
@@ -37,7 +45,7 @@
  *
  *  @since 1.0
  */
-+ (instancetype(^)(void))shareInstanceWithConfig:(XMBaseServiceConfigurationObject *)config;
++ (instancetype(^)(void))shareInstanceWithConfig:(CHDXCityBaseServiceConfigurationObject *)config;
 /**
  *  @author Lampard Hong, 16-01-18 14:01:29
  *
@@ -45,9 +53,9 @@
  *
  *  @since 1.0
  */
-- (instancetype(^)(XMBaseServiceConfigurationObject *config))reloadConfig;
+- (instancetype(^)(CHDXCityBaseServiceConfigurationObject *config))reloadConfig;
 
--(void)basicInitWithConfiguration:(XMBaseServiceConfigurationObject *)configuration;
+-(void)basicInitWithConfiguration:(CHDXCityBaseServiceConfigurationObject *)configuration;
 
 -(NSError *)createServiceErrorWithDomain:(NSString *)domain
                            withErrorCode:(NSInteger)errorCode
@@ -55,8 +63,8 @@
 
 -(BOOL)vaildateNoEmptyParametersWithParamtersKey:(NSString *)parameterKey
                               withParameterVaule:(NSString *)parameterValue
-                                      errorLevel:(XMServiceErrorLevel)errorLevel
-                                     withFailure:(void (^)(NSURLSessionDataTask *task, NSError *error, XMCommonResponse *response))failure;
+                                      errorLevel:(CHDXCityServiceErrorLevel)errorLevel
+                                     withFailure:(void (^)(NSURLSessionDataTask *task, NSError *error, CHDXCityCommonResponse *response))failure;
 
 
 

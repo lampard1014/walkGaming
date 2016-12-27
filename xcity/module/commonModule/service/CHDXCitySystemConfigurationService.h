@@ -1,16 +1,18 @@
 //
-//  XMSystemConfigurationService.h
+//  CHDXCitySystemConfigurationService.h
 //  ECoupon
 //
 //  Created by 余妙玉 on 16/6/17.
 //  Copyright © 2016年 Xkeshi. All rights reserved.
 //
 
-#import "XMBaseService.h"
-@class XMPaymentModeResponseResult;
+#import "CHDXCityBaseService.h"
 
-@interface XMSystemConfigurationService : XMBaseService
 
+FOUNDATION_EXPORT NSString * const kCHDXCitySystemConfigurationService_DeviceNumber;
+FOUNDATION_EXPORT NSString * const kCHDXCitySystemConfigurationService_ShopId;
+
+@interface CHDXCitySystemConfigurationService : CHDXCityBaseService
 
 @property (nonatomic, strong) NSString *appName;/**< app名称 */
 
@@ -28,12 +30,6 @@
 @property (nonatomic, strong) NSString *deviceSystemVersion;/**< 设备系统版本, e.g. @"4.0" */
 
 
-@property (nonatomic, strong)XMPaymentModeResponseResult *paymentModel;
-
-- (void)fetchPaymentModeWithDeviceNumber:(NSString *)deviceNumber
-                              withShopId:(NSNumber *)shopId
-                                 success:(void (^)(NSURLSessionDataTask *task, XMCommonResponse *response))success
-                                 failure:(void (^)(NSURLSessionDataTask *task, NSError *error, XMCommonResponse *response))failure;
 
 
 @end

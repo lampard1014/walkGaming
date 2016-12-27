@@ -1,42 +1,46 @@
 //
-//  XMNetworkingService.h
+//  CHDXCityNetworkingService.h
 //  ECoupon
 //
 //  Created by 余妙玉 on 16/6/1.
 //  Copyright © 2016年 Xkeshi. All rights reserved.
 //
 
-#import "XMBaseService.h"
-@class XMCommonResponse;
+#import "CHDXCityBaseService.h"
+@class CHDXCityCommonResponse;
+
+
+
 /**
  *  @author yomyoutama, 16-06-15 23:06:44
  *
  *  @brief  成功的code
  */
-static NSString const *successResponseCode = @"0";
+FOUNDATION_EXPORT NSString * const successResponseCode;
 
-extern NSString * const XAppTypeCommonForIPhoneString;
+FOUNDATION_EXPORT NSString * const XAppTypeCommonForIPhoneString;
 
 /**
  *  @author yomyoutama, 16-06-15 23:06:51
  *
  *  @brief  异常code－未绑定
  */
-static NSString const *exception_unbindRespnoseCode = @"S_1001";
+FOUNDATION_EXPORT NSString * const exception_unbindRespnoseCode;
 
 /**
  *  @author yomyoutama, 16-06-22 15:06:43
  *
  *  @brief  未绑定的通知
  */
-static NSString *XMNetworkingService_unbindRespnoseNotification = @"XMNetworkingService_unbindRespnoseNotification";
+FOUNDATION_EXPORT NSString * const CHDXCityNetworkingService_unbindRespnoseNotification;
 
+FOUNDATION_EXPORT NSString * const CHDXCityNetworkingServiceRawResponseData;
 
-static NSString *kHttpMethod = @"kErrorMethod";
-static NSString *kSignatureError = @"kSignatureError";
-static NSString *kErrorResult = @"kErrorResult";
-static NSString *kNetworkingRechbility = @"kNetworkingRechbility";
-static NSString *kXMNetworkingServiceErrorDomain = @"com.NetworkingError.XM";
+FOUNDATION_EXPORT NSString * const kHttpMethod;
+FOUNDATION_EXPORT NSString * const kSignatureError;
+FOUNDATION_EXPORT NSString * const kErrorResult;
+FOUNDATION_EXPORT NSString * const kNetworkingRechbility;
+FOUNDATION_EXPORT NSString * const kCHDXCityNetworkingServiceErrorDomain;
 
 
 /**
@@ -44,7 +48,7 @@ static NSString *kXMNetworkingServiceErrorDomain = @"com.NetworkingError.XM";
  *
  *  @brief  底层网络Service
  */
-@interface XMNetworkingService : XMBaseService
+@interface CHDXCityNetworkingService : CHDXCityBaseService
 
 /**
  *  @author yomyoutama, 16-06-06 13:06:24
@@ -53,7 +57,7 @@ static NSString *kXMNetworkingServiceErrorDomain = @"com.NetworkingError.XM";
  *
  *  @param url              请求的地址
  *  @param params           请求的参数
- *  @param httpMethod       请求的方法 XMHTTPMethod 枚举值
+ *  @param httpMethod       请求的方法 CHDXCityHTTPMethod 枚举值
  *  @param success          成功的回调（NSURLSessionDataTask *task, id responseObject）
  *  @param failure          失败的回调 (NSURLSessionDataTask *task, NSError *error)
  *  @param uploadProgress   上传的进度 POST,
@@ -61,9 +65,9 @@ static NSString *kXMNetworkingServiceErrorDomain = @"com.NetworkingError.XM";
  */
 - (void)dataTaskWithUrl:(NSString *)url
                  params:(NSDictionary *)params
-             httpMethod:(XMHTTPMethod)httpMethod
-                success:(void (^)(NSURLSessionDataTask *task, XMCommonResponse *response))success
-                failure:(void (^)(NSURLSessionDataTask *task, NSError *error, XMCommonResponse *response))failure
+             httpMethod:(CHDXCityHTTPMethod)httpMethod
+                success:(void (^)(NSURLSessionDataTask *task, CHDXCityCommonResponse *response))success
+                failure:(void (^)(NSURLSessionDataTask *task, NSError *error, CHDXCityCommonResponse *response))failure
         withRelationMap:(NSDictionary <NSString *, NSString *>*)relationMap
          uploadProgress:(void (^)(NSProgress *uploadProgress)) uploadProgress
        downloadProgress:(void (^)(NSProgress *downloadProgress)) downloadProgress;

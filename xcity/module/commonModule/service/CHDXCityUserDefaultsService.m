@@ -1,19 +1,19 @@
 //
-//  XMUserDefaultsService.m
+//  CHDXCityUserDefaultsService.m
 //  ECoupon
 //
 //  Created by 余妙玉 on 16/6/13.
 //  Copyright © 2016年 Xkeshi. All rights reserved.
 //
 
-#import "XMUserDefaultsService.h"
+#import "CHDXCityUserDefaultsService.h"
 
-#ifndef kXMUserDefaultSearchResultArrayMaxCount
-#define kXMUserDefaultSearchResultArrayMaxCount    20
+#ifndef kCHDXCityUserDefaultSearchResultArrayMaxCount
+#define kCHDXCityUserDefaultSearchResultArrayMaxCount    20
 #endif
 
 
-@interface XMUserDefaultsService () {
+@interface CHDXCityUserDefaultsService () {
     NSUserDefaults *userDefaults;
     int page;
     int pageSize;
@@ -21,16 +21,16 @@
 
 @end
 
-@implementation XMUserDefaultsService
+@implementation CHDXCityUserDefaultsService
 
 
-static XMUserDefaultsService *shareInstance;
+static CHDXCityUserDefaultsService *shareInstance;
 
-+ (instancetype(^)(void))shareInstanceWithConfig:(XMBaseServiceConfigurationObject *)config;
++ (instancetype(^)(void))shareInstanceWithConfig:(CHDXCityBaseServiceConfigurationObject *)config;
 {
     static dispatch_once_t predicate;
     
-    return ^XMUserDefaultsService *{
+    return ^CHDXCityUserDefaultsService *{
         
         if (!shareInstance) {
             dispatch_once(&predicate, ^{
@@ -45,11 +45,11 @@ static XMUserDefaultsService *shareInstance;
     
 }
 
-- (void)basicInitWithConfiguration:(XMBaseServiceConfigurationObject *)configuration;
+- (void)basicInitWithConfiguration:(CHDXCityBaseServiceConfigurationObject *)configuration;
 {
     shareInstance->userDefaults = [NSUserDefaults standardUserDefaults];
     shareInstance->page = 1;
-    shareInstance->pageSize = kXMUserDefaultSearchResultArrayMaxCount;
+    shareInstance->pageSize = kCHDXCityUserDefaultSearchResultArrayMaxCount;
 }
 
 
@@ -63,7 +63,7 @@ static XMUserDefaultsService *shareInstance;
         
         NSArray *defaultArray = [strongself->userDefaults arrayForKey:key];
         
-        strongself->pageSize = strongself->pageSize ? : kXMUserDefaultSearchResultArrayMaxCount;
+        strongself->pageSize = strongself->pageSize ? : kCHDXCityUserDefaultSearchResultArrayMaxCount;
         
         NSUInteger start = (strongself->page - 1) * strongself->pageSize;
         if (start >= [defaultArray count]) {
@@ -126,7 +126,7 @@ static XMUserDefaultsService *shareInstance;
             
             if (index < [tmp count]) {
                 [tmp removeObjectAtIndex:index];
-            } else if((kXMUserDefaultSearchResultArrayMaxCount == [tmp count])){
+            } else if((kCHDXCityUserDefaultSearchResultArrayMaxCount == [tmp count])){
                 [tmp removeObjectAtIndex:[tmp count] - 1];
             }
             [tmp insertObject:addKeyWord atIndex:0];

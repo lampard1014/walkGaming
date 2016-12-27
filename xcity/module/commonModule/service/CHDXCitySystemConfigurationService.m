@@ -1,33 +1,31 @@
 //
-//  XMSystemConfigurationService.m
+//  CHDXCitySystemConfigurationService.m
 //  ECoupon
 //
 //  Created by 余妙玉 on 16/6/17.
 //  Copyright © 2016年 Xkeshi. All rights reserved.
 //
 
-#import "XMSystemConfigurationService.h"
-#import "XMLoginService.h"
-#import "XMNetworkingService.h"
-#import "XMCoreDataService.h"
-
-#import "XMPaymentModeResponseResult.h"
-#import "XMPaymentModeResponseResult_paymentChannels.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "CHDXCitySystemConfigurationService.h"
+#import "CHDXCityNetworkingService.h"
+#import "CHDXCityCoreDataService.h"
 
 
-static NSString *kXMSystemConfigurationService_DeviceNumber = @"kDeviceNumber";
-static NSString *kXMSystemConfigurationService_ShopId = @"kShopId";
-static NSString *kXMSystemConfigure_paymentMode_url = @"/api/xpos/payment/mode";
 
-static XMSystemConfigurationService *shareInstance;
+NSString * const kCHDXCitySystemConfigurationService_DeviceNumber = @"kDeviceNumber";
+NSString * const kCHDXCitySystemConfigurationService_ShopId = @"kShopId";
 
-@implementation XMSystemConfigurationService
+static CHDXCitySystemConfigurationService *shareInstance;
 
-+ (instancetype(^)(void))shareInstanceWithConfig:(XMBaseServiceConfigurationObject *)config;
+@implementation CHDXCitySystemConfigurationService
+
++ (instancetype(^)(void))shareInstanceWithConfig:(CHDXCityBaseServiceConfigurationObject *)config;
 {
     static dispatch_once_t predicate;
     
-    return ^XMSystemConfigurationService *{
+    return ^CHDXCitySystemConfigurationService *{
         
         if (!shareInstance) {
             dispatch_once(&predicate, ^{
@@ -42,7 +40,7 @@ static XMSystemConfigurationService *shareInstance;
 }
 
 
--(void)basicInitWithConfiguration:(XMBaseServiceConfigurationObject *)configuration;
+-(void)basicInitWithConfiguration:(CHDXCityBaseServiceConfigurationObject *)configuration;
 {
     
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
@@ -61,71 +59,18 @@ static XMSystemConfigurationService *shareInstance;
 {
     return @{
 
-             kXMSystemConfigurationService_DeviceNumber:@{
-                     @"code":@((int)[kXMSystemConfigurationService_DeviceNumber UTF8String]),
+             kCHDXCitySystemConfigurationService_DeviceNumber:@{
+                     @"code":@((int)[kCHDXCitySystemConfigurationService_DeviceNumber UTF8String]),
                      NSLocalizedDescriptionKey:@"设备号",
                      NSLocalizedFailureReasonErrorKey:@"设备号为空",
                      },
-            kXMSystemConfigurationService_ShopId:@{
-                     @"code":@((int)[kXMSystemConfigurationService_ShopId UTF8String]),
+            kCHDXCitySystemConfigurationService_ShopId:@{
+                     @"code":@((int)[kCHDXCitySystemConfigurationService_ShopId UTF8String]),
                      NSLocalizedDescriptionKey:@"shopId",
                      NSLocalizedFailureReasonErrorKey:@"shopId为空,请先绑定",
                      }
              };
 }
 
-- (void)fetchPaymentModeWithDeviceNumber:(NSString *)deviceNumber
-                              withShopId:(NSNumber *)shopId
-                                 success:(void (^)(NSURLSessionDataTask *task, XMCommonResponse *response))success
-                                 failure:(void (^)(NSURLSessionDataTask *task, NSError *error, XMCommonResponse *response))failure;
-{
-    NSString *shopIdStr = shopId ? [NSString stringWithFormat:@"%ld", (long)[shopId integerValue]] : nil;
-    
-    __weak typeof(self)weakself = self;
-    if (
-        [self vaildateNoEmptyParametersWithParamtersKey:kXMSystemConfigurationService_ShopId withParameterVaule:shopIdStr errorLevel:XMServiceErrorLevel_FaildBlock withFailure:failure]
-        &&
-        [self vaildateNoEmptyParametersWithParamtersKey:kXMSystemConfigurationService_DeviceNumber withParameterVaule:deviceNumber errorLevel:XMServiceErrorLevel_FaildBlock withFailure:failure]
-        ) {
-        //
-        XMNetworkingService *networkService = [XMNetworkingService shareInstanceWithConfig:nil]();
-        
-        [networkService dataTaskWithUrl:kXMSystemConfigure_paymentMode_url
-                                 params:@{
-                                          @"deviceNumber":deviceNumber,
-                                          @"shopId":shopIdStr
-                                          }
-                             httpMethod:XMHTTPMethod_Post
-                                success:^(NSURLSessionDataTask *task, XMCommonResponse *response){
-                                    
-                                    if (response && [[response result]isKindOfClass:[XMPaymentModeResponseResult class]]) {
-                                    
-                                        weakself.paymentModel = (XMPaymentModeResponseResult *)[response result];
-
-                                        if (success) {
-                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                success(task, response);
-                                            });
-                                        }
-                                        
-                                    } else {
-                                        weakself.paymentModel = nil;
-                                        if (failure) {
-                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                failure(nil, nil, response);
-                                            });
-                                        }
-                                    }
-                                }
-                                failure:failure
-                        withRelationMap:@{
-                                          @"result":NSStringFromClass([XMPaymentModeResponseResult class]),
-                                          @"paymentChannels":NSStringFromClass([XMPaymentModeResponseResult_paymentChannels class])
-                                          }
-                         uploadProgress:nil
-                       downloadProgress:nil];
-        
-    }
-}
 
 @end

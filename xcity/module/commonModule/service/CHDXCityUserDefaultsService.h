@@ -1,14 +1,14 @@
 //
-//  XMUserDefaultsService.h
+//  CHDXCityUserDefaultsService.h
 //  ECoupon
 //
 //  Created by 余妙玉 on 16/6/13.
 //  Copyright © 2016年 Xkeshi. All rights reserved.
 //
 
-#import "XMBaseService.h"
+#import "CHDXCityBaseService.h"
 
-@interface XMUserDefaultsService : XMBaseService
+@interface CHDXCityUserDefaultsService : CHDXCityBaseService
 
 /**
  *  @author Lampard Hong, 16-01-18 10:01:13

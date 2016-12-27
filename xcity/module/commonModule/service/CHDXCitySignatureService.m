@@ -1,24 +1,24 @@
 //
-//  XMSignatureService.m
+//  CHDXCitySignatureService.m
 //  ECoupon
 //
 //  Created by 余妙玉 on 16/6/1.
 //  Copyright © 2016年 Xkeshi. All rights reserved.
 //
 
-#import "XMSignatureService.h"
+#import "CHDXCitySignatureService.h"
 #import "XKSEncryptor.h"
 #import "XKSSystemObj.h"
 
-static XMSignatureService *shareInstance;
+static CHDXCitySignatureService *shareInstance;
 
-@implementation XMSignatureService
+@implementation CHDXCitySignatureService
 
-+ (instancetype(^)(void))shareInstanceWithConfig:(XMBaseServiceConfigurationObject *)config;
++ (instancetype(^)(void))shareInstanceWithConfig:(CHDXCityBaseServiceConfigurationObject *)config;
 {
     static dispatch_once_t predicate;
     
-    return ^XMSignatureService *{
+    return ^CHDXCitySignatureService *{
         
         if (!shareInstance) {
             dispatch_once(&predicate, ^{
@@ -33,12 +33,12 @@ static XMSignatureService *shareInstance;
 }
 
 
--(void)basicInitWithConfiguration:(XMBaseServiceConfigurationObject *)configuration;
+-(void)basicInitWithConfiguration:(CHDXCityBaseServiceConfigurationObject *)configuration;
 {
     self.serviceConfiguration = configuration;
     XKSSystemObj *sdkObj = [XKSSystemObj shareXKSSystemObj];
-    sdkObj.md5Secret = XMSignMD5Secret;
-    sdkObj.appKey = XMSignAppID;
+    sdkObj.md5Secret = CHDXCitySignMD5Secret;
+    sdkObj.appKey = CHDXCitySignAppID;
     sdkObj.signaterEnable = [self signatureEnable];
     sdkObj.validateEnable = [self vaildateEnable];
     sdkObj.encryptType = XKSEncryptType_MD5;
@@ -46,14 +46,14 @@ static XMSignatureService *shareInstance;
 
 }
 
--(XMXMSignatureType)fetchXMXMSignatureType;
+-(CHDXCitySignatureType)fetchCHDXCitySignatureType;
 {
-    return _signatureType = _signatureType?:XMXMSignatureType_Default;
+    return _signatureType = _signatureType?:CHDXCitySignatureType_Default;
 }
 
 -(NSDictionary *)signDataWithUrl:(NSString *)url
                       withParams:(NSDictionary *)params
-                  withHttpMethod:(XMHTTPMethod)httpMethod;
+                  withHttpMethod:(CHDXCityHTTPMethod)httpMethod;
 {
     NSDictionary *signDic;
     if ([self signatureEnable]) {
@@ -68,20 +68,20 @@ static XMSignatureService *shareInstance;
 
 -(BOOL)signatureEnable;
 {
-    return XMXMSignatureType_Request == [self fetchXMXMSignatureType] ||XMXMSignatureType_Both == [self fetchXMXMSignatureType];
+    return CHDXCitySignatureType_Request == [self fetchCHDXCitySignatureType] ||CHDXCitySignatureType_Both == [self fetchCHDXCitySignatureType];
 }
 -(BOOL)vaildateEnable;
 {
-    return XMXMSignatureType_Response == [self fetchXMXMSignatureType] ||XMXMSignatureType_Both == [self fetchXMXMSignatureType];
+    return CHDXCitySignatureType_Response == [self fetchCHDXCitySignatureType] ||CHDXCitySignatureType_Both == [self fetchCHDXCitySignatureType];
 
 }
 
-- (BOOL)needEncodingParametersInURIWithHTTPMethod:(XMHTTPMethod)HTTPMethod
+- (BOOL)needEncodingParametersInURIWithHTTPMethod:(CHDXCityHTTPMethod)HTTPMethod
 {
     switch (HTTPMethod) {
-        case XMHTTPMethod_Get:
-        case XMHTTPMethod_Head:
-        case XMHTTPMethod_Delete:
+        case CHDXCityHTTPMethod_Get:
+        case CHDXCityHTTPMethod_Head:
+        case CHDXCityHTTPMethod_Delete:
             return YES;
         default:
             return NO;

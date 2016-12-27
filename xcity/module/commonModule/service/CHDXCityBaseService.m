@@ -6,19 +6,19 @@
 //  Copyright © 2016年 Lampard Hong. All rights reserved.
 //
 
-#import "XMBaseService.h"
-#import "XMBaseServiceConfigurationObject.h"
-#import "XMCommonResponse.h"
+#import "CHDXCityBaseService.h"
+#import "CHDXCityBaseServiceConfigurationObject.h"
+#import "CHDXCityCommonResponse+CoreDataClass.h"
 
-static NSString *kXMBaseServiceErrorDomain = @"com.BaseService.XM";
+NSString * const kCHDXCityBaseServiceErrorDomain = @"com.BaseService.CHDXCity";
 
-@interface XMBaseService(){
+@interface CHDXCityBaseService(){
 }
 
 @end
-static XMBaseService *shareInstance;
+static CHDXCityBaseService *shareInstance;
 
-@implementation XMBaseService
+@implementation CHDXCityBaseService
 
 -(id)init;
 {
@@ -27,16 +27,16 @@ static XMBaseService *shareInstance;
     return self;
 }
 
--(void)basicInitWithConfiguration:(XMBaseServiceConfigurationObject *)configuration;
+-(void)basicInitWithConfiguration:(CHDXCityBaseServiceConfigurationObject *)configuration;
 {
     self.serviceConfiguration = configuration;
 }
 
-+ (instancetype(^)(void))shareInstanceWithConfig:(XMBaseServiceConfigurationObject *)config;
++ (instancetype(^)(void))shareInstanceWithConfig:(CHDXCityBaseServiceConfigurationObject *)config;
 {
     static dispatch_once_t predicate;
     
-    return ^XMBaseService *{
+    return ^CHDXCityBaseService *{
         
         if (!shareInstance) {
             dispatch_once(&predicate, ^{
@@ -51,47 +51,47 @@ static XMBaseService *shareInstance;
 }
 
 
-- (instancetype(^)(XMBaseServiceConfigurationObject *config))reloadConfig;
+- (instancetype(^)(CHDXCityBaseServiceConfigurationObject *config))reloadConfig;
 {
     __weak typeof (self)weakself = self;
     
-    return ^XMBaseService *(XMBaseServiceConfigurationObject *config){
+    return ^CHDXCityBaseService *(CHDXCityBaseServiceConfigurationObject *config){
         __strong typeof(weakself)strongself = weakself;
         strongself.serviceConfiguration = config;
         return self;
     };
 }
 
-- (XMServiceErrorLevel)fetchErrorLevel;
+- (CHDXCityServiceErrorLevel)fetchErrorLevel;
 {
-    return self.serviceConfiguration.errorLevel  = self.serviceConfiguration.errorLevel ? : XMServiceErrorLevel_Default;
+    return self.serviceConfiguration.errorLevel  = self.serviceConfiguration.errorLevel ? : CHDXCityServiceErrorLevel_Default;
 
 }
 
 -(BOOL)vaildateNoEmptyParametersWithParamtersKey:(NSString *)parameterKey
                               withParameterVaule:(NSString *)parameterValue
-                                      errorLevel:(XMServiceErrorLevel)errorLevel
-                                     withFailure:(void (^)(NSURLSessionDataTask *task, NSError *error, XMCommonResponse *response))failure;
+                                      errorLevel:(CHDXCityServiceErrorLevel)errorLevel
+                                     withFailure:(void (^)(NSURLSessionDataTask *task, NSError *error, CHDXCityCommonResponse *response))failure;
 {
     BOOL vaildateResult = YES;
     
     __weak typeof(self)weakself = self;
     
     if (!parameterValue) {
-        if (XMServiceErrorLevel_Default == errorLevel) {
+        if (CHDXCityServiceErrorLevel_Default == errorLevel) {
             return vaildateResult = NO;
             
-        } else if (XMServiceErrorLevel_Assert == errorLevel) {
+        } else if (CHDXCityServiceErrorLevel_Assert == errorLevel) {
             NSAssert(parameterValue, [self serverDiscription][parameterKey][NSLocalizedFailureReasonErrorKey]);
             
             return vaildateResult = NO;
             
-        } else if (XMServiceErrorLevel_FaildBlock == errorLevel) {
+        } else if (CHDXCityServiceErrorLevel_FaildBlock == errorLevel) {
             if (failure) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
-                    NSError *error = [weakself createServiceErrorWithDomain:kXMBaseServiceErrorDomain withErrorCode: [[weakself serverDiscription][parameterKey][@"code"]integerValue] withErrorUserInfo:[weakself serverDiscription][parameterKey]];
+                    NSError *error = [weakself createServiceErrorWithDomain:kCHDXCityBaseServiceErrorDomain withErrorCode: [[weakself serverDiscription][parameterKey][@"code"]integerValue] withErrorUserInfo:[weakself serverDiscription][parameterKey]];
                     failure(nil, error, nil);
                     
                 });

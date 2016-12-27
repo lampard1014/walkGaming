@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <AFNetworking/AFNetworking.h>
-
+#import "CHDXCityNetworkingService.h"
 @interface AppDelegate ()
 
 @end
@@ -53,11 +52,13 @@
 {
     NSString *urlString = [NSString stringWithFormat:@"http://192.168.145.47:8066/api/wechat/snsapi_base/%@",code];
     
+    CHDXCityNetworkingService *netWorkService = [CHDXCityNetworkingService shareInstanceWithConfig:nil]();
     
-    NSURLSessionDataTask *task = [[AFHTTPSessionManager manager]dataTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]] completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        NSLog(@"NSURLResponse * _Nonnull response %@, id  _Nullable responseObject %@, NSError * _Nullable error %@", response, responseObject, error);
-    }];
-    [task resume];
+    
+//    NSURLSessionDataTask *task = [[AFHTTPSessionManager manager]dataTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]] completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+//        NSLog(@"NSURLResponse * _Nonnull response %@, id  _Nullable responseObject %@, NSError * _Nullable error %@", response, responseObject, error);
+//    }];
+//    [task resume];
 }
 
 
